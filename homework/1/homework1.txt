@@ -1,0 +1,4 @@
+#!/bin/sh
+mkdir /home/siace
+find /usr/lib -name "*std*" > /home/siace/files.txt
+wc -l <  /home/siace/files.txt 
