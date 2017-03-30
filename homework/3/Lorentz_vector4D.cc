@@ -10,7 +10,7 @@ int main () {
 
   double len_v1_square,len_v2_square,distance_square;
   LV4D v1,v2;
-  v1.x = 1,v1.y = 1,v1.z = 1,v1.t = 0,v2.x = 9,v2.y = 1,v2.z = 1,v2.t = 10;
+  v1.x = 1,v1.y = 1,v1.z = 1,v1.t = 0,v2.x = 9,v2.y = 1,v2.z = 1,v2.t = 5;
   len_v1_square = v1.x*v1.x + v1.y*v1.y + v1.z*v1.z - v1.t*v1.t;
   len_v2_square = v2.x*v2.x + v2.y*v2.y + v2.z*v2.z - v2.t*v2.t;
   distance_square = (v1.x-v2.x)*(v1.x-v2.x) + (v1.y-v2.y)*(v1.y-v2.y) + (v1.z-v2.z)*(v1.z-v2.z) - (v1.t-v2.t)*(v1.t-v2.t);
