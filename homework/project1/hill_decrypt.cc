@@ -31,8 +31,11 @@ int quotient(int dividend, int divisor){
 
 int main(int argc, char * argv[]) {
 
+  // This program must accept four arguments of the encrypt matrix
+  if (argc != 5)
+    return 1;
+
   string raw_ct;
-  cout << "Enter the ciphered text: ";
   cin >> raw_ct;
   vector<int> encrypt_matrix(4, 0);
   vector<int> decrypt_matrix(4, 0);
@@ -46,7 +49,7 @@ int main(int argc, char * argv[]) {
   }
 
   //Calculate the decrypt_matrix
-  int det = encrypt_matrix[0]*encrypt_matrix[3] - encrypt_matrix[1]*encrypt_matrix[2];
+  int det = modulo(encrypt_matrix[0]*encrypt_matrix[3] - encrypt_matrix[1]*encrypt_matrix[2],26);
   decrypt_matrix[0] = encrypt_matrix[3];
   decrypt_matrix[1] = -encrypt_matrix[1];
   decrypt_matrix[2] = -encrypt_matrix[2];
@@ -57,7 +60,7 @@ int main(int argc, char * argv[]) {
    
   //Convert the chars in ciphered text into their corresponding numbers 
   for (int i = 0; i < raw_ct.size();i++) {
-    ct.push_back((raw_ct[i]<'Z')?(raw_ct[i] - 'A' + 1):(raw_ct[i] - 'a' + 1));
+    ct.push_back((raw_ct[i]<'Z')?(raw_ct[i] - 'A'):(raw_ct[i] - 'a'));
   }
 
   //Add a 0 to ciphered text if the lenth of it is odd 
@@ -67,15 +70,14 @@ int main(int argc, char * argv[]) {
   //Calculate the plain text using decrypt_matrix
   int i = 0;
   while (i < raw_ct.size()) {
-    pt.push_back((decrypt_matrix[0]*ct[i] + decrypt_matrix[1]*ct[i+1] - 1)%26 + 1);
-    pt.push_back((decrypt_matrix[2]*ct[i] + decrypt_matrix[3]*ct[i+1] - 1)%26 + 1);
+    pt.push_back(modulo(decrypt_matrix[0]*ct[i] + decrypt_matrix[1]*ct[i+1],26));
+    pt.push_back(modulo(decrypt_matrix[2]*ct[i] + decrypt_matrix[3]*ct[i+1],26));
     i += 2;
   }
 
   //Print out the plain text
-  cout << "The plain text is: ";
   for (auto c : pt)
-    cout << (char)(c + 'a' -1);
+    cout << (char)(c + 'a');
   cout << endl;
     
   return 0;
